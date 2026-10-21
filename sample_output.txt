@@ -1,0 +1,125 @@
+================================================================================
+TECHNICAL ASSESSMENT: SOFTWARE ENGINEERING INTERN - SAMPLE OUTPUT
+================================================================================
+
+--------------------------------------------------------------------------------
+SECTION 1: SENSOR READINGS SANITIZER (sanitizer.py)
+--------------------------------------------------------------------------------
+
+Command:
+python sanitizer.py
+
+Terminal Output:
+=======================================================
+  Section 1: Clean and Normalize Sensor Readings
+=======================================================
+
+Test 1 - Mixed valid and invalid inputs:
+  Input:    ['12.5', None, -5, 'bad_data', 550.0, 42, '0']
+  Expected: [12.5, 500.0, 42.0, 0.0]
+  Got:      [12.5, 500.0, 42.0, 0.0]
+  Result:   PASS
+
+Test 2 - Empty list:
+  Input:    []
+  Expected: []
+  Got:      []
+  Result:   PASS
+
+Test 3 - All invalid entries:
+  Input:    [None, 'error', -1, -999.0, 'N/A', 'null']
+  Expected: []
+  Got:      []
+  Result:   PASS
+
+=======================================================
+  All 3 tests passed!
+=======================================================
+
+
+Unit Tests Command:
+python -m unittest test_sanitizer.py
+
+Output:
+Ran 6 tests in 0.000s
+OK
+
+
+--------------------------------------------------------------------------------
+SECTION 2: CORE DATA PROCESSING TASK (summarizer.py)
+--------------------------------------------------------------------------------
+
+Command:
+python summarizer.py
+
+Terminal Output:
+==============================================================
+DEVICE TELEMETRY SUMMARY REPORT
+Filter: Devices with avg temperature > 80.0°C removed
+==============================================================
+
+Filtered out (1 device(s)):
+  - DEV_B: avg temp 85.5°C (exceeds 80.0°C)
+
+Device     Records    Avg Temp    Min       Max       Errors  
+---------------------------------------------------------
+DEV_A      4          47.98       45.2      52.1      1       
+DEV_C      4          24.5        22.4      26.5      1       
+DEV_D      3          72.17       70.8      74.5      0       
+DEV_E      4          67.17       65.0      69.1      2       
+
+---------------------------------------------------------
+Total: 4 device(s), 15 record(s), 4 error(s)
+Excluded: 1 device(s) above 80.0°C threshold
+==============================================================
+
+
+Exported File: summary_output.json
+[
+    {
+        "device_id": "DEV_A",
+        "total_records": 4,
+        "average_temperature": 47.98,
+        "error_count": 1
+    },
+    {
+        "device_id": "DEV_C",
+        "total_records": 4,
+        "average_temperature": 24.5,
+        "error_count": 1
+    },
+    {
+        "device_id": "DEV_D",
+        "total_records": 3,
+        "average_temperature": 72.17,
+        "error_count": 0
+    },
+    {
+        "device_id": "DEV_E",
+        "total_records": 4,
+        "average_temperature": 67.17,
+        "error_count": 2
+    }
+]
+
+
+--------------------------------------------------------------------------------
+SECTION 3: AI PROMPTING & CHARTING CHALLENGE (visualize.py)
+--------------------------------------------------------------------------------
+
+Command:
+python visualize.py
+
+Terminal Output:
+Chart saved as 'device_temperatures.png'
+
+Generated Chart Deliverable:
+- Filename: device_temperatures.png
+- Dimensions: High-resolution plot (200 DPI)
+- Features:
+    * Color-coded bars mapped by temperature range (<30°C cool, 30-50°C normal, 50-70°C warm, 70-80°C hot)
+    * Multi-line value annotations over each bar (Avg Temp, error count, record count)
+    * Red dotted reference line at the 80.0°C cutoff limit
+    * Clean typography with non-overlapping labels and padded headroom
+
+================================================================================
